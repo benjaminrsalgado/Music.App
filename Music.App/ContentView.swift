@@ -8,70 +8,119 @@
 import SwiftUI
 
 struct ContentView: View {
-    let apps = [
-        AppItem(nombre: "Notas", categoria: "Productividad", icono: "note.text"),
-        AppItem(nombre: "Música", categoria: "Entretenimiento", icono: "music.note"),
-        AppItem(nombre: "Salud", categoria: "Bienestar", icono: "heart.fill"),
-        AppItem(nombre: "Fotos", categoria: "Creatividad", icono: "photo")
+    let musica = [
+        album(numero: "1",nombre: "...Ready For It!"),
+        album(numero: "2",nombre: "End Game (feat.Ed Sheeran & Future)"),
+        album(numero: "3",nombre: "I Did Something Bad"),
+        album(numero: "4",nombre: "Don´t Blame Me"),
+        album(numero: "5",nombre: "Delicate"),
+        album(numero: "6",nombre: "Look What You Made Me Do"),
+        album(numero: "7",nombre: "So It Goes..."),
+        album(numero: "8",nombre: "Gorgeous"),
+        album(numero: "9",nombre: "Getaway Car"),
+        album(numero: "10",nombre: "King Of My Heart"),
+        album(numero: "11",nombre: "Dancing With Our Hands Tied"),
+        album(numero: "12",nombre: "Dress"),
+        album(numero: "13",nombre: "This Is Why We Can´t Have Nice Things"),
+        album(numero: "14",nombre: "Call It What You Want"),
+        album(numero: "15",nombre: "New Year´s Day")
     ]
     var body: some View{
         ZStack{
-            LinearGradient(
-                gradient: Gradient(colors: [.gray, .red]),
-                startPoint: .top,
-                endPoint: .bottom
-            ).ignoresSafeArea()
+            Color.black
+                .ignoresSafeArea()
             VStack{
-                Text("Catalogo de apps fav 🎸")
-                    .font(.title)
-                ScrollView{
-                    VStack{
-                        ForEach(apps){ pepe in
-                            CardView(app: pepe)
-                        }
+                Image("reputation")
+                    .resizable() // Permite que la imagen cambie de tamaño
+                    .scaledToFit() // Escala la imagen para que se ajuste sin distorsión
+                    .frame(width: 250, height: 250)
+                Text("reputation")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text("Taylor Swift")
+                    .font(.headline)
+                    .foregroundColor(.red)
+                HStack{
+                    Text("Country •")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Text("2017 •")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Text("Lossless")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                HStack(spacing: 16) {
+                    Button(action: {
+                        print("playing the album")
+                    }) {
+                        Label("Play", systemImage: "play.fill")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 28/255, green: 28/255, blue: 30/255))
+                            .foregroundColor(.red)
+                            .cornerRadius(12)
+                    }
+                    
+                    Button(action: {
+                        print("shuffle the album")
+                    }) {
+                        Label("Shuffle", systemImage: "shuffle")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 28/255, green: 28/255, blue: 30/255))
+                            .foregroundColor(.red)
+                            .cornerRadius(12)
                     }
                 }
+                Divider()
+                    .frame(height: 1)
+                    .background(Color.gray.opacity(0.3))
+                    .padding(.top, 8)
+                
+                List(musica) { pepe in
+                    albumCard(album1: pepe)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
+                .scrollContentBackground(.hidden)
+                
+              
             }
         }
+      
     }
 }
 
-struct AppItem: Identifiable {
+struct album: Identifiable{
     let id = UUID()
-    let nombre: String
-    let categoria: String
-    let icono: String
+    let numero: String
+    let nombre : String
 }
 
-struct CardView: View{
-    let app : AppItem
+struct albumCard: View{
+    let album1 : album
     var body: some View{
-        HStack(spacing: 16) {
-            Image(systemName: app.icono)
-                .font(.system(size: 30))
-                .frame(width: 50, height: 50)
-                .background(Color.white.opacity(0.2))
-                .clipShape(Circle())
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(app.nombre)
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-
-                Text(app.categoria)
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.7))
-            }
-
-            Spacer()
-
-            Button("Abrir") {
-                print("Abriendo \(app.nombre)")
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.white)
-            .foregroundColor(.black)
-        }
-        
+        VStack(spacing: 0) {
+                    HStack {
+                        Text(album1.numero)
+                            .foregroundColor(.gray)
+                        Text(album1.nombre)
+                            .font(.headline)
+                        Spacer()
+                        Image(systemName: "arrow.down.circle.fill")
+                            .foregroundColor(.gray)
+                        Image(systemName: "ellipsis")
+                    }
+                    .padding(.vertical, 9.093)
+                    
+                    Divider()
+                        .frame(height: 1)
+                        .background(Color.gray.opacity(0.3))
+                        .padding(.leading, 35)
+                }
+                .foregroundColor(.white)
     }
 }
 #Preview {
