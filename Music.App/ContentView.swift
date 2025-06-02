@@ -8,39 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    let canciones = [
-        Music(titulo: "Shape of You", artista: "Ed Sheeran", icono: "music.note"),
-        Music(titulo: "Blinding Lights", artista: "The Weeknd", icono: "headphones"),
-        Music(titulo: "Levitating", artista: "Dua Lipa", icono: "guitars"),
-        Music(titulo: "Uptown Funk", artista: "Bruno Mars", icono: "music.mic"),
-        Music(titulo: "As It Was", artista: "Harry Styles", icono: "music.quarternote.3"),
-        Music(titulo: "Shape of You", artista: "Ed Sheeran", icono: "music.note"),
-        Music(titulo: "Blinding Lights", artista: "The Weeknd", icono: "headphones"),
-        Music(titulo: "Levitating", artista: "Dua Lipa", icono: "guitars"),
-        Music(titulo: "Uptown Funk", artista: "Bruno Mars", icono: "music.mic"),
-        Music(titulo: "As It Was", artista: "Harry Styles", icono: "music.quarternote.3"),
-        Music(titulo: "Shape of You", artista: "Ed Sheeran", icono: "music.note"),
-        Music(titulo: "Blinding Lights", artista: "The Weeknd", icono: "headphones"),
-        Music(titulo: "Levitating", artista: "Dua Lipa", icono: "guitars"),
-        Music(titulo: "Uptown Funk", artista: "Bruno Mars", icono: "music.mic"),
-        Music(titulo: "As It Was", artista: "Harry Styles", icono: "music.quarternote.3")
+    let apps = [
+        AppItem(nombre: "Notas", categoria: "Productividad", icono: "note.text"),
+        AppItem(nombre: "Música", categoria: "Entretenimiento", icono: "music.note"),
+        AppItem(nombre: "Salud", categoria: "Bienestar", icono: "heart.fill"),
+        AppItem(nombre: "Fotos", categoria: "Creatividad", icono: "photo")
     ]
-    var body: some View {
-        ZStack {
-      LinearGradient(
-        gradient: Gradient(colors: [.purple, .pink]),
-        startPoint: .top,
-        endPoint: .bottom
-      )
-      .ignoresSafeArea()
-            
-            VStack (alignment: .center){
-                Text("The best Music in the World 🌎")
-                    .font(.largeTitle)
+    var body: some View{
+        ZStack{
+            LinearGradient(
+                gradient: Gradient(colors: [.gray, .red]),
+                startPoint: .top,
+                endPoint: .bottom
+            ).ignoresSafeArea()
+            VStack{
+                Text("Catalogo de apps fav 🎸")
+                    .font(.title)
                 ScrollView{
                     VStack{
-                        ForEach (canciones){ pepe in
-                            MusicCard (musica: pepe)
+                        ForEach(apps){ pepe in
+                            CardView(app: pepe)
                         }
                     }
                 }
@@ -48,33 +35,45 @@ struct ContentView: View {
         }
     }
 }
-struct Music: Identifiable{
+
+struct AppItem: Identifiable {
     let id = UUID()
-    let titulo: String
-    let artista: String
+    let nombre: String
+    let categoria: String
     let icono: String
 }
 
-struct MusicCard: View{
-    let musica : Music
+struct CardView: View{
+    let app : AppItem
     var body: some View{
-        HStack{
-            Image(systemName: musica.icono)
-            VStack{
-                Text(musica.titulo)
-                    .font(.headline)
-                Text(musica.artista)
+        HStack(spacing: 16) {
+            Image(systemName: app.icono)
+                .font(.system(size: 30))
+                .frame(width: 50, height: 50)
+                .background(Color.white.opacity(0.2))
+                .clipShape(Circle())
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(app.nombre)
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+
+                Text(app.categoria)
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.white.opacity(0.7))
             }
+
+            Spacer()
+
+            Button("Abrir") {
+                print("Abriendo \(app.nombre)")
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.white)
+            .foregroundColor(.black)
         }
-        .background(.blue.opacity(0.2))
-        .cornerRadius(33)
-        .shadow(radius: 4)
-        .padding()
+        
     }
 }
-
 #Preview {
     ContentView()
 }
