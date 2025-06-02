@@ -123,6 +123,55 @@ struct albumCard: View{
                 .foregroundColor(.white)
     }
 }
+
+//Falta aqui editar el menu, esta mal este menu, corregirlo y asi
+
+struct Menu: View {
+    var body: some View {
+        TabView {
+            ZStack {
+                Color.black.ignoresSafeArea()
+            }
+            .tabItem {
+                Image(systemName: "play.circle.fill")
+                Text("Listen Now")
+            }
+
+            ZStack {
+                Color.black.ignoresSafeArea()
+            }
+            .tabItem {
+                Image(systemName: "square.grid.2x2.fill")
+                Text("Browse")
+            }
+
+            ZStack {
+                Color.black.ignoresSafeArea()
+            }
+            .tabItem {
+                Image(systemName: "dot.radiowaves.left.and.right")
+                Text("Radio")
+            }
+
+            ZStack {
+                Color.black.ignoresSafeArea()
+            }
+            .tabItem {
+                Image(systemName: "music.note.list")
+                Text("Library")
+            }
+
+            ZStack {
+                Color.black.ignoresSafeArea()
+            }
+            .tabItem {
+                Image(systemName: "magnifyingglass")
+                Text("Search")
+            }
+        }
+        .accentColor(.red)
+    }
+}
 #Preview {
     ContentView()
 }
