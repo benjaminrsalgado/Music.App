@@ -30,8 +30,8 @@ This is a **non functional demo**  it **does not play music** or connect to any 
 - Xcode 15+
 
 ## 📸 Screenshot
+![Captura de pantalla 2025-06-03 a la(s) 10 01 12 a m](https://github.com/user-attachments/assets/acec1145-2583-4bb8-bfcd-f44f08c13e57)
 
-<img src="Captura de pantalla 2025-06-02 a la(s) 2.01.24 p.m..png" width="250" />
 
 ## ⚠️ Note
 
